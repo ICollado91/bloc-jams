@@ -28,6 +28,21 @@
      ]
  };
 
+ var albumDevOps = {
+     title: 'Computer Blues',
+     artist: 'DevOps',
+     label: 'DefJam',
+     year: '2016',
+     albumArtUrl: 'assets/images/album_covers/22.png',
+     songs: [
+         { title: 'Compile Please!', duration: '2:01' },
+         { title: 'Tears of an overworked CPU Fan', duration: '3:24' },
+         { title: 'Why won\'t you snap to the top left', duration: '3:21'},
+         { title: 'No ifs but fors!', duration: '5:57' },
+         { title: 'Lost in your code', duration: '2:44'}
+     ]
+ };
+ 
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -62,7 +77,19 @@
          albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
      }
  };
+
+var i = 1;
+var albumImg = document.getElementsByClassName('album-cover-art')[0];
+var albums = [albumPicasso, albumMarconi, albumDevOps];
  
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
+     
+     albumImg.addEventListener('click', function (event) {
+         setCurrentAlbum(albums[i]);
+         (i == albums.length - 1) ? i = 0 : i++;
+     });
  };
+
+
+
