@@ -64,6 +64,14 @@ var albumPicasso = {
      }
  };
  
+var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
+var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
+
  window.onload = function() {
+     
+     songListContainer.addEventListener('mouseover', function(event) {
+         console.log(event.target);
+     });
+     
      setCurrentAlbum(albumPicasso);
  };
