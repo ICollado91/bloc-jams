@@ -65,11 +65,23 @@ var albumPicasso = {
  };
 
 var findParentByClassName = function (element, targetClass) {
+    
+    if (element.parentElement == 'null') { // checks to see if a parent exists
+        alert('No parent found.');
+        return;
+    }
+    
     if (element) { 
         var currentParent = element.parentElement; 
         while (currentParent.className != targetClass && currentParent.className !== null) {
             currentParent = currentParent.parentElement;
         }
+        
+        if (currentParent.className != targetClass) {
+            alert('No parent found with that class name.')
+            return;
+        }
+        
         return currentParent;
     }
 };
