@@ -185,6 +185,20 @@ var updatePlayerBarSong = function () {
     $('.main-controls .play-pause').html(playerBarPauseButton);
 };
 
+var togglePlayFromPlayerBar = function () {    
+    var $songCell = getSongNumberCell(currentlyPlayingSongNumber);
+    
+    if (currentSoundFile.isPaused()) {
+        $(this).html(playerBarPauseButton);
+        $songCell.html(pauseButtonTemplate);
+        currentSoundFile.play();
+    } else {
+        $(this).html(playerBarPlayButton);
+        $songCell.html(playButtonTemplate);
+        currentSoundFile.pause();
+    }
+}
+
 
 var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
 var songRows = document.getElementsByClassName('album-view-song-item');
@@ -210,4 +224,9 @@ var $nextButton = $('.main-controls .next');
      
      $previousButton.click(previousSong);
      $nextButton.click(nextSong);
+     
+     var playerBar = $('.main-controls .play-pause');
+     
+     playerBar.click(togglePlayFromPlayerBar);
+     
  });
