@@ -32,6 +32,7 @@ var getSongNumberCell = function (number) {
 
 
 var createSongRow = function(songNumber, songName, songLength) {
+     songLength = filterTimeCode(songLength);
      var template =
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + parseInt(songNumber) + '">' + parseInt(songNumber) + '</td>'
@@ -135,6 +136,8 @@ var createSongRow = function(songNumber, songName, songLength) {
              var $seekBar = $('.seek-control .seek-bar');
  
              updateSeekPercentage($seekBar, seekBarFillRatio);
+             var time = currentSoundFile.getTime();
+             setCurrentTimeInPlayerBar(filterTimeCode(time));
          });
      }
  };
@@ -264,13 +267,46 @@ var previousSong = function() {
 };
 
 var updatePlayerBarSong = function () {
+    var songLength = currentSongFromAlbum['duration'];
+    setTotalTimeInPlayerBar(filterTimeCode(songLength));
     $('.song-name').text(currentSongFromAlbum['title']);
     $('.artist-song-mobile').text(currentSongFromAlbum['title'] + ' - ' + currentAlbum['artist']);
     $('.artist-name').text(currentAlbum['artist']);
-    
     $('.main-controls .play-pause').html(playerBarPauseButton);
 };
 
+
+
+var setCurrentTimeInPlayerBar = function (currentTime) {
+    $('.current-time').text(currentTime);
+};
+
+var setTotalTimeInPlayerBar = function (totalTime) {
+    $('.total-time').text(totalTime);
+};
+
+/*
+var filterTimeCode = function (number) {
+    
+    var time = new Date(number * 1000);
+    var sec = time.getSeconds();
+    var min = time.getMinutes();
+    
+    sec = sec > 9 ? "" + sec: "0" + sec;
+    
+    return min + ':' + sec;
+};
+*/
+var filterTimeCode = function (number) {
+    
+    var x = parseFloat(number);
+    var min = Math.floor(x/60);
+    var sec = Math.floor(x % 60);
+    
+    sec = sec > 9 ? "" + sec: "0" + sec;
+    
+    return min + ':' + sec;
+};
 
 var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
 var songRows = document.getElementsByClassName('album-view-song-item');
