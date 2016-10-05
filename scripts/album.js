@@ -136,7 +136,7 @@ var createSongRow = function(songNumber, songName, songLength) {
              var $seekBar = $('.seek-control .seek-bar');
  
              updateSeekPercentage($seekBar, seekBarFillRatio);
-             var time = currentSoundFile.getTime();
+             var time = this.getTime();
              setCurrentTimeInPlayerBar(filterTimeCode(time));
          });
      }
